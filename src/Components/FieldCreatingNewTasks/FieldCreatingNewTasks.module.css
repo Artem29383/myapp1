@@ -1,0 +1,43 @@
+.header {
+  color: #4d4d4d;
+}
+
+
+
+.todos__input {
+  width: 100%;
+  font-size: 24px;
+  line-height: 1.4em;
+  border: none;
+  padding: 16px 16px 16px 53px;
+}
+
+
+.todos__input::placeholder {
+  opacity: 0.3;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.toggle__all {
+  width: 60px;
+  height: 34px;
+  position: absolute;
+  top: 17px;
+  font-size: 22px;
+  left: -8px;
+  color: #e6e6e6;
+  transform: rotate(90deg);
+}
+
+.toggle__all.active {
+  color: #000;
+}
+
+.toggle__all:hover {
+  cursor: pointer;
+}
+
+.toggle__all:before {
+  content: "❯";
+}
