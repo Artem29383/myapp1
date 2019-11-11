@@ -13,7 +13,3 @@ export const getAllSelectedState = (state) => {
 export const getLeftTasks = (state) => {
   return state.task.leftTasks;
 };
-
-export const getFilterValue = (state) => {
-  return state.task.filter;
-};

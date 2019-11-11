@@ -1,29 +1,32 @@
 import React from 'react';
 import classes from './Task.module.css';
+import {getCountLeftTasks, removeTask} from "../../../State/ToDo-Reducer";
 
-const Task = (props) => {
-    return (<li className={classes.item} onDoubleClick={props.startChangeTask}>
-        {!props.editMode ? <label className={classes.toggle}>
+class Task extends React.Component {
+  changeBox = () => {
+    this.props.changeCheck(this.props.id);
+  };
+
+  removeTask = () => {
+    this.props.removeTask(this.props.id);
+  };
+
+  render() {
+    return (
+      <li className={classes.item}>
+        <label className={classes.toggle}>
           <input type="checkbox"/>
-          <span onClick={props.changeBox} className={props.check
-            ? `${classes.checkbox__custom} ${classes.check}`
-            : `${classes.checkbox__custom}`}></span>
-          <span className={classes.text} id={props.id}>{props.task}</span>
-          <button className={classes.removebtn} onClick={props.removeTask}></button>
+          <span onClick={this.changeBox} className={this.props.check ? `${classes.checkbox__custom} ${classes.check}`
+            :
+            `${classes.checkbox__custom}`}></span>
+          <span className={classes.text} id={this.props.id}>{this.props.task}</span>
+          <button className={classes.removebtn} onClick={this.removeTask}></button>
           <button className={classes.noclick}></button>
-        </label> : <input ref={props.currentEditTask}
-                          autoFocus={true}
-                          className={!props.editMode
-                            ? `${classes.edit}`
-                            : `${classes.edit} ${classes.active}`
-                          }
-                          value={props.cacheValueTask}
-                          onChange={(e) => props.changeValueTask(e.currentTarget.value)}
-                          onBlur={(e) => {props.stopChangeTask(e, props.cacheValueTask)}}
-                          onKeyDown={(e) => {props.stopChangeTask(e, props.cacheValueTask)}}/>
-        }
+        </label>
+        <input className={classes.edit}/>
       </li>
     )
-};
+  }
+}
 
 export default Task;
