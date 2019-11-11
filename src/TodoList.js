@@ -1,52 +1,42 @@
-import React from 'react';
-import classes from './TodoList.module.css';
-import FieldCreatingNewTask from "./Components/FieldCreatingNewTasks/FieldCreatingNewTasks";
-import {getAllSelectedState, getInitState, getLeftTasks, getTasks} from "./State/ToDo-Reselect";
+import React, {useEffect} from 'react';
 import {
+  getAllSelectedState, getFilterValue,
+  getInitState,
+  getLeftTasks,
+  getTasks,
+} from "./State/ToDo-Reselect";
+import {
+  addTask,
   changeCheck, controllAllSelected, getCountLeftTasks,
-  initState,
+  initState, removeSelectedTasks,
   removeTask,
   selectAllTasks,
-  setAllTasks
+  endEditTask, removeClearTask, filterTasks, outputFilterFromLocalStorage
 } from "./State/ToDo-Reducer";
 import {connect} from "react-redux";
-import TaskListContainer from "./Components/TaskList/Task/TaskListContainer";
-import Footer from "./Components/Footer/Footer";
+import TodoListApp from "./Components/TodoListApp/TodoListApp";
 
-class TodoList extends React.Component {
+const  TodoList  = (props) => {
 
-
-  componentDidMount() {
-    this.props.initState();
-    if (localStorage.getItem('todo')) {
-      this.props.setAllTasks(JSON.parse(localStorage.getItem('todo')));
+  useEffect(() => {
+    if (localStorage.getItem('filter')) {
+      props.outputFilterFromLocalStorage(JSON.parse(localStorage.getItem('filter')));
     }
-  }
+    props.initState();
+    }, []);
 
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps != this.props || nextState != this.state;
-  }
+  useEffect(() => {
+    props.getCountLeftTasks();
+    props.controllAllSelected();
+  }, [props.tasks]);
 
-  componentDidUpdate() {
-    this.props.controllAllSelected();
-    this.props.getCountLeftTasks();
-    localStorage.setItem('todo', JSON.stringify(this.props.tasks));
-  }
 
-  render() {
     return (
       <>
-        <header className={classes.header__text}>todos</header>
-        {(this.props.init) ? <div className={classes.todo}>
-          <FieldCreatingNewTask selectAllTasks={this.props.selectAllTasks}
-                                allSelected={this.props.allSelected}/>
-          <TaskListContainer {...this.props}/>
-          <Footer leftTasks = {this.props.leftTasks}/>
-        </div> : <div></div>}
+        {props.init ? <TodoListApp {...props}/> : <> </>}
       </>
     );
-  }
 };
 
 const mapStateToProps = (state) => {
@@ -54,7 +44,8 @@ const mapStateToProps = (state) => {
     tasks: getTasks(state),
     init: getInitState(state),
     allSelected: getAllSelectedState(state),
-    leftTasks: getLeftTasks(state)
+    leftTasks: getLeftTasks(state),
+    filter: getFilterValue(state)
   }
 };
 
@@ -62,9 +53,14 @@ export default connect(mapStateToProps,
   {
     changeCheck,
     removeTask,
-    setAllTasks,
     initState,
     selectAllTasks,
     controllAllSelected,
-    getCountLeftTasks
+    getCountLeftTasks,
+    removeSelectedTasks,
+    addTask,
+    endEditTask,
+    removeClearTask,
+    filterTasks,
+    outputFilterFromLocalStorage
   })(TodoList);

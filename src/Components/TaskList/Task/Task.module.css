@@ -15,6 +15,11 @@
   padding: 10px 0;
 }
 
+.toggle.redactor {
+  display: none;
+}
+
+
 
 .noclick {
   width: 100%;
@@ -29,6 +34,7 @@
 .toggle input {
   display: none;
 }
+
 
 .checkbox__custom {
   display: block;
@@ -65,6 +71,8 @@
   width: 70%;
   word-wrap: break-word;
 }
+
+
 
 .checkbox__custom.check::before {
   transform: scale(1);
