@@ -10,8 +10,8 @@ import {
   changeCheck, controllAllSelected, getCountLeftTasks,
   initState, removeSelectedTasks,
   removeTask,
-  selectAllTasks,
-  endEditTask, removeClearTask, filterTasks, outputFilterFromLocalStorage
+  selectedAllTasks,
+  endEditTask, removeEmptyTask, filterTasks, outputFilterFromLocalStorage, outputFromLocalStorage
 } from "./State/ToDo-Reducer";
 import {connect} from "react-redux";
 import TodoListApp from "./Components/TodoListApp/TodoListApp";
@@ -19,6 +19,9 @@ import TodoListApp from "./Components/TodoListApp/TodoListApp";
 const  TodoList  = (props) => {
 
   useEffect(() => {
+    if (localStorage.getItem('todo')) {
+      props.outputFromLocalStorage(JSON.parse(localStorage.getItem('todo')));
+    }
     if (localStorage.getItem('filter')) {
       props.outputFilterFromLocalStorage(JSON.parse(localStorage.getItem('filter')));
     }
@@ -29,6 +32,7 @@ const  TodoList  = (props) => {
   useEffect(() => {
     props.getCountLeftTasks();
     props.controllAllSelected();
+    localStorage.setItem('todo', JSON.stringify(props.tasks));
   }, [props.tasks]);
 
 
@@ -54,13 +58,14 @@ export default connect(mapStateToProps,
     changeCheck,
     removeTask,
     initState,
-    selectAllTasks,
+    selectedAllTasks,
     controllAllSelected,
     getCountLeftTasks,
     removeSelectedTasks,
+    outputFromLocalStorage,
     addTask,
     endEditTask,
-    removeClearTask,
+    removeEmptyTask,
     filterTasks,
     outputFilterFromLocalStorage
   })(TodoList);

@@ -1,24 +1,17 @@
 import React, {useState} from 'react';
 import Task from "./Task";
-import API from "./../../../Api/Api"
 
 const TaskContainer = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [cacheValueTask, changeCacheValueTask] = useState('');
   const currentEditTask = React.createRef();
 
-  const changeBox = async () => {
-    const response = await API.putCheckBox(props.id, props.check, props.task);
-      if (response.statusText === 'OK') {
-        props.changeCheck();
-      }
+  const changeBox = () => {
+    props.changeCheck(props.id);
   };
 
-  const removeTask = async () => {
-    const response = await API.deleteRemoveTask(props.id);
-      if (response.statusText === 'OK') {
-        props.removeTask();
-      }
+  const removeTask = () => {
+    props.removeTask(props.id);
   };
 
   const startChangeTask = () => {
@@ -31,17 +24,9 @@ const TaskContainer = (props) => {
   };
 
   const stopEditTask = (value) => {
-    API.putUpdateValueTask(props.id, props.check, value).then(response => {
-      if (response.statusText === 'OK') {
-        props.endEditTask();
-      }
-    });
+    props.endEditTask(props.id, value);
     if (value === '') {
-      API.deleteRemoveTask(props.id).then(response => {
-        if (response.statusText === 'OK') {
-          props.removeClearTask();
-        }
-      });
+      props.removeEmptyTask();
     }
     setEditMode(false);
   };
@@ -57,8 +42,11 @@ const TaskContainer = (props) => {
     }
   };
 
+
   return (
-    <Task {...props}
+    <Task check = {props.check}
+          id = {props.id}
+          task = {props.task}
           editMode={editMode}
           cacheValueTask={cacheValueTask}
           currentEditTask={currentEditTask}

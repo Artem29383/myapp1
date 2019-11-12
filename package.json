@@ -2,7 +2,7 @@
   "name": "todolist",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Artem29383/myapp1",
+  "homepage": "https://artem29383.github.io/myapp1",
   "dependencies": {
     "axios": "^0.19.0",
     "json-server": "^0.15.1",
