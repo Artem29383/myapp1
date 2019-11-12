@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {
-  getAllSelectedState, getFilterValue,
+  getAllSelectedFromState, getFilterValue,
   getInitState,
   getLeftTasks,
   getTasks,
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
   return {
     tasks: getTasks(state),
     init: getInitState(state),
-    allSelected: getAllSelectedState(state),
+    allSelected: getAllSelectedFromState(state),
     leftTasks: getLeftTasks(state),
     filter: getFilterValue(state)
   }

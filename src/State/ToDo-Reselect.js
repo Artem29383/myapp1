@@ -6,7 +6,7 @@ export const getInitState = (state) => {
   return state.task.init;
 };
 
-export const getAllSelectedState = (state) => {
+export const getAllSelectedFromState = (state) => {
   return state.task.allSelected;
 };
 
