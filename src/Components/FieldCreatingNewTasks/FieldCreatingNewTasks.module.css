@@ -4,7 +4,7 @@
 
 
 
-.todos__input {
+.todosInput {
   width: 100%;
   font-size: 24px;
   line-height: 1.4em;
@@ -13,13 +13,13 @@
 }
 
 
-.todos__input::placeholder {
+.todosInput::placeholder {
   opacity: 0.3;
   font-style: italic;
   font-weight: bold;
 }
 
-.toggle__all {
+.toggleAll {
   width: 60px;
   height: 34px;
   position: absolute;
@@ -30,14 +30,14 @@
   transform: rotate(90deg);
 }
 
-.toggle__all.active {
+.toggleAll.active {
   color: #000;
 }
 
-.toggle__all:hover {
+.toggleAll:hover {
   cursor: pointer;
 }
 
-.toggle__all:before {
+.toggleAll:before {
   content: "❯";
 }

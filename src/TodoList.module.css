@@ -40,7 +40,7 @@ input {
   outline: 0 !important;
 }
 
-.header__text {
+.headerText {
   margin-top: 150px;
   font-size: 100px;
   color: rgba(175, 47, 47, 0.15);

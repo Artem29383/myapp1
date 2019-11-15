@@ -1,32 +1,35 @@
 import React from 'react';
-import classes from "./FieldCreatingNewTasks.module.css";
+import classes from './FieldCreatingNewTasks.module.css';
 
 
-const FieldCreatingNewTask = (props) => {
-
-  const BtnSelectAll = (props) => {
-    if (!props.leftTasks && !props.tasks.length) {
-      return <> </>
-    } else {
-      return (
-        <button onClick={props.selectAll} className={props.allSelected
-          ? `${classes.toggle__all} ${classes.active}`
-          : `${classes.toggle__all}`}></button>)
-    }
-  };
-
+const FieldCreatingNewTask = React.memo(({
+     tasks,
+     changeValue,
+     selectAll,
+     value,
+     allSelected
+   }) => {
   return (
-    <div className={classes.header}>
-      <input onChange={props.changeValue} autoFocus={true} className={classes.todos__input}
-             placeholder={'What needs to be done?'}
-             value={props.value} onKeyDown={(e) => props.onKeyDownCreateTask(e.key, props.value)}/>
-      <BtnSelectAll leftTasks={props.leftTasks}
-                    tasks={props.tasks}
-                    allSelected={props.allSelected}
-                    selectAll = {props.selectAll}/>
-    </div>
-  );
-};
+      <div className={classes.header}>
+        <input
+          onChange={changeValue}
+          onKeyPress={changeValue}
+          autoFocus
+          className={classes.todosInput}
+          value={value}
+          placeholder='What needs to be done?'
+        />
+        {!!tasks.length &&
+        <button
+          onClick={selectAll}
+          className={allSelected
+            ? `${classes.toggleAll} ${classes.active}`
+            : `${classes.toggleAll}`}
+          />
+        }
+      </div>
+    );
+  });
 
 
 export default FieldCreatingNewTask;

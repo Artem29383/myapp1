@@ -4,7 +4,7 @@
 }
 
 
-.item:hover .removebtn {
+.item:hover .removeBtn {
   opacity: 1;
 }
 
@@ -21,13 +21,13 @@
 
 
 
-.task__text {
+.taskText {
   width: 100%;
   height: 100%;
   position: absolute;
 }
 
-.task__text:hover {
+.taskText:hover {
   cursor: pointer;
 }
 
@@ -36,7 +36,7 @@
 }
 
 
-.checkbox__custom {
+.checkboxCustom {
   display: block;
   width: 25px;
   margin-right: 20px;
@@ -49,11 +49,11 @@
   z-index: 10;
 }
 
-.checkbox__custom:hover {
+.checkboxCustom:hover {
   cursor: pointer;
 }
 
-.checkbox__custom::before {
+.checkboxCustom::before {
   content: "✓";
   color: green;
   left: 4.5px;
@@ -74,17 +74,17 @@
 
 
 
-.checkbox__custom.check::before {
+.checkboxCustom.check::before {
   transform: scale(1);
 }
 
-.checkbox__custom.check + .text {
+.checkboxCustom.check + .text {
   color: #d9d9d9;
   text-decoration: line-through;
 }
 
 
-.removebtn {
+.removeBtn {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -96,11 +96,11 @@
   color: #cc9a9a;
 }
 
-.removebtn::after {
+.removeBtn::after {
   content: "×";
 }
 
-.removebtn:hover {
+.removeBtn:hover {
   color: #000;
   cursor: pointer;
 }

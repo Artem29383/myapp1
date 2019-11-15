@@ -1,5 +1,5 @@
-import {combineReducers, createStore, applyMiddleware} from "redux";
-import taskReducer from "./ToDo-Reducer";
+import { combineReducers, createStore } from 'redux';
+import taskReducer from './ToDo-Reducer';
 
 
 let reducer = combineReducers(

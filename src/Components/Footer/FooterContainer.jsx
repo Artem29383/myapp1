@@ -1,6 +1,5 @@
 import React from 'react';
-import classes from "./Footer.module.css";
-import Footer from "./Footer";
+import Footer from './Footer';
 
 
 const FooterContainer = (props) => {
@@ -10,11 +9,13 @@ const FooterContainer = (props) => {
   };
 
   return (
-    <Footer leftTasks={props.leftTasks}
-            removeSelectedTasks={props.removeSelectedTasks}
-            tasks={props.tasks}
-            filter={props.filter}
-            filterTasks = {filterTasks}/>
+    <Footer
+      leftTasks={props.leftTasks}
+      removeSelectedTasks={props.removeSelectedTasks}
+      tasks={props.tasks}
+      filter={props.filter}
+      filterTasks = {filterTasks}
+    />
   )
 };
 

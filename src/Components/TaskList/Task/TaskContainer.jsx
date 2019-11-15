@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import Task from "./Task";
+import React, { useState, useCallback, useRef } from 'react';
+import Task from './Task';
 
 const TaskContainer = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [cacheValueTask, changeCacheValueTask] = useState('');
-  const currentEditTask = React.createRef();
+  const currentEditTask = useRef(null);
 
   const changeBox = () => {
     props.changeCheck(props.id);
@@ -19,9 +19,9 @@ const TaskContainer = (props) => {
     changeCacheValueTask(props.task);
   };
 
-  const changeValueTask = (value) => {
+  const changeValueTask = useCallback((value) => {
     changeCacheValueTask(value);
-  };
+  }, [cacheValueTask]);
 
   const stopEditTask = (value) => {
     props.endEditTask(props.id, value);
@@ -44,18 +44,18 @@ const TaskContainer = (props) => {
 
 
   return (
-    <Task check = {props.check}
-          id = {props.id}
-          task = {props.task}
-          editMode={editMode}
-          cacheValueTask={cacheValueTask}
-          currentEditTask={currentEditTask}
-          changeBox={changeBox}
-          removeTask={removeTask}
-          startChangeTask={startChangeTask}
-          changeValueTask={changeValueTask}
-          stopEditTask={stopEditTask}
-          stopChangeTask={stopChangeTask}
+    <Task
+      check = {props.check}
+      id = {props.id}
+      task = {props.task}
+      editMode={editMode}
+      cacheValueTask={cacheValueTask}
+      currentEditTask={currentEditTask}
+      changeBox={changeBox}
+      removeTask={removeTask}
+      startChangeTask={startChangeTask}
+      changeValueTask={(changeValueTask)}
+      stopChangeTask={stopChangeTask}
     />
   )
 };

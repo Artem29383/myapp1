@@ -1,9 +1,17 @@
-import React, {useState} from 'react';
-import FieldCreatingNewTask from "./FieldCreatingNewTasks";
-
+import React, { useState, useCallback } from 'react';
+import FieldCreatingNewTask from './FieldCreatingNewTasks';
 
 const FieldCreatingNewTaskContainer = (props) => {
-  let [value, EditValue] = useState('');
+  let [value, editValue] = useState('');
+
+  const changeValue = useCallback(e => {
+    editValue(e.currentTarget.value);
+    if (e.key === 'Enter') {
+      props.addTask(generateId(), e.currentTarget.value);
+      editValue('');
+    }
+  }, [value]);
+
 
   const generateId = () => {
     return Math.floor(1 + Math.random() * (9999999999999999));
@@ -13,25 +21,17 @@ const FieldCreatingNewTaskContainer = (props) => {
     props.selectedAllTasks();
   };
 
-  const changeValue = (e) => {
-    EditValue(e.currentTarget.value);
-  };
-
-  const onKeyDownCreateTask = (key, value) => {
-    if (key === 'Enter') {
-      props.addTask(generateId(), value);
-      EditValue('');
-    }
-  };
 
   return (
-    <FieldCreatingNewTask leftTasks = {props.leftTasks}
-                          tasks = {props.tasks}
-                          changeValue = {changeValue}
-                          onKeyDownCreateTask = {onKeyDownCreateTask}
-                          selectAll = {selectAll}
-                          value = {value}/>
-  );
+    <FieldCreatingNewTask
+      leftTasks = {props.leftTasks}
+      tasks = {props.tasks}
+      selectAll = {selectAll}
+      allSelected = {props.allSelected}
+      value = {value}
+      changeValue = {(changeValue)}
+    />
+  )
 };
 
 

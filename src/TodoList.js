@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   getAllSelectedFromState, getFilterValue,
   getInitState,
   getLeftTasks,
   getTasks,
-} from "./State/ToDo-Reselect";
+} from './State/ToDo-Reselect';
 import {
   addTask,
   changeCheck, controllAllSelected, getCountLeftTasks,
@@ -12,9 +12,9 @@ import {
   removeTask,
   selectedAllTasks,
   endEditTask, removeEmptyTask, filterTasks, outputFilterFromLocalStorage, outputFromLocalStorage
-} from "./State/ToDo-Reducer";
-import {connect} from "react-redux";
-import TodoListApp from "./Components/TodoListApp/TodoListApp";
+} from './State/ToDo-Reducer';
+import { connect } from 'react-redux';
+import TodoListApp from './Components/TodoListApp/TodoListApp';
 
 const  TodoList  = (props) => {
 
@@ -38,7 +38,7 @@ const  TodoList  = (props) => {
 
     return (
       <>
-        {props.init ? <TodoListApp {...props}/> : <> </>}
+        {props.init ? <TodoListApp {...props}/> : null}
       </>
     );
 };
