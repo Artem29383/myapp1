@@ -19,17 +19,6 @@ import TodoListApp from './Components/TodoListApp/TodoListApp';
 const  TodoList  = (props) => {
 
   useEffect(() => {
-    if (localStorage.getItem('todo')) {
-      props.outputFromLocalStorage(JSON.parse(localStorage.getItem('todo')));
-    }
-    if (localStorage.getItem('filter')) {
-      props.outputFilterFromLocalStorage(JSON.parse(localStorage.getItem('filter')));
-    }
-    props.initState();
-    }, []);
-
-
-  useEffect(() => {
     props.getCountLeftTasks();
     props.controllAllSelected();
     localStorage.setItem('todo', JSON.stringify(props.tasks));
@@ -37,9 +26,7 @@ const  TodoList  = (props) => {
 
 
     return (
-      <>
-        {props.init ? <TodoListApp {...props}/> : null}
-      </>
+     <TodoListApp {...props}/>
     );
 };
 
@@ -62,10 +49,8 @@ export default connect(mapStateToProps,
     controllAllSelected,
     getCountLeftTasks,
     removeSelectedTasks,
-    outputFromLocalStorage,
     addTask,
     endEditTask,
     removeEmptyTask,
     filterTasks,
-    outputFilterFromLocalStorage
   })(TodoList);
