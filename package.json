@@ -5,7 +5,9 @@
   "homepage": "https://artem29383.github.io/myapp1",
   "dependencies": {
     "axios": "^0.19.0",
+    "classnames": "^2.2.6",
     "json-server": "^0.15.1",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",

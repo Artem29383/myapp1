@@ -10,7 +10,7 @@ const TaskList = (props) => {
       return <TaskContainer
         key={index}
         id={t.id}
-        check={t.check}
+        isCheck={t.check}
         task={t.title}
         {...props}
       />
@@ -18,7 +18,7 @@ const TaskList = (props) => {
       return <TaskContainer
         key={index}
         id={t.id}
-        check={t.check}
+        isCheck={t.check}
         task={t.title}
         {...props}
       />
@@ -26,7 +26,7 @@ const TaskList = (props) => {
       return <TaskContainer
         key={index}
         id={t.id}
-        check={t.check}
+        isCheck={t.check}
         task={t.title}
         {...props}
       />

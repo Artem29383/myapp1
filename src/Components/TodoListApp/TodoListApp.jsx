@@ -12,9 +12,7 @@ const TodoListApp = (props) => {
       <div className={classes.todo}>
         <FieldCreatingNewTaskContainer {...props}/>
         <TaskList {...props}/>
-        {!props.tasks.length
-          ? null
-          : <FooterContainer {...props}/>}
+        {!!props.tasks.length && <FooterContainer {...props}/>}
       </div>
     </>
   );

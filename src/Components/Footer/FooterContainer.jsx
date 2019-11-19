@@ -12,7 +12,7 @@ const FooterContainer = (props) => {
     <Footer
       leftTasks={props.leftTasks}
       removeSelectedTasks={props.removeSelectedTasks}
-      tasks={props.tasks}
+      tasks={props.tasks.length}
       filter={props.filter}
       filterTasks = {filterTasks}
     />

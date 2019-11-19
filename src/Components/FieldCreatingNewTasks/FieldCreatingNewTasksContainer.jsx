@@ -24,10 +24,9 @@ const FieldCreatingNewTaskContainer = (props) => {
 
   return (
     <FieldCreatingNewTask
-      leftTasks = {props.leftTasks}
-      tasks = {props.tasks}
+      isTasks = {!!props.tasks}
       selectAll = {selectAll}
-      allSelected = {props.allSelected}
+      isAllSelected = {!!props.allSelected}
       value = {value}
       changeValue = {(changeValue)}
     />

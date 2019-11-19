@@ -45,7 +45,7 @@ const TaskContainer = (props) => {
 
   return (
     <Task
-      check = {props.check}
+      isCheck = {props.isCheck}
       id = {props.id}
       task = {props.task}
       editMode={editMode}
