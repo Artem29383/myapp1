@@ -8,9 +8,10 @@ const Footer = ({
   removeSelectedTasks,
   tasks,
   filter,
-  filterTasks}) => {
-    return (
-      <div className={classes.dataFooter}>
+  filterTasks
+}) => {
+  return (
+    <div className={classes.dataFooter}>
 		  <span className={classes.todoCount}>
 			<strong>{leftTasks}</strong>
 			  item left
@@ -18,18 +19,18 @@ const Footer = ({
         <ul className={classes.filters}>
           <li>
             <a href="#/All"
-               className={classNames(classes.filterBtnJs, filter === 'All' && classes.active)}
-               onClick={(e) => filterTasks(e.currentTarget.innerText)}>All</a>
+              className={classNames(classes.filterBtnJs, filter === 'All' && classes.active)}
+              onClick={(e) => filterTasks(e.currentTarget.innerText)}>All</a>
           </li>
           <li>
             <a href="#/Active"
-               className={classNames(classes.filterBtnJs, filter === 'Active' && classes.active)}
-               onClick={(e) => filterTasks(e.currentTarget.innerText)}>Active</a>
+              className={classNames(classes.filterBtnJs, filter === 'Active' && classes.active)}
+              onClick={(e) => filterTasks(e.currentTarget.innerText)}>Active</a>
           </li>
           <li>
             <a href="#/Completed"
-               className={classNames(classes.filterBtnJs, filter === 'Completed' && classes.active)}
-               onClick={(e) => filterTasks(e.currentTarget.innerText)}>Completed</a>
+              className={classNames(classes.filterBtnJs, filter === 'Completed' && classes.active)}
+              onClick={(e) => filterTasks(e.currentTarget.innerText)}>Completed</a>
           </li>
         </ul>
         <button

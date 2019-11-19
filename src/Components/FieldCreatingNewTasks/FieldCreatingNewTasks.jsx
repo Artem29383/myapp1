@@ -8,7 +8,8 @@ const FieldCreatingNewTask =({
   changeValue,
   selectAll,
   value,
-  isAllSelected}) => {
+  isAllSelected
+}) => {
   return (
     <div className={classes.header}>
       <input
