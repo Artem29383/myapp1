@@ -21,7 +21,7 @@ const TaskContainer = (props) => {
 
   const changeValueTask = useCallback((value) => {
     changeCacheValueTask(value);
-  }, [cacheValueTask]);
+  }, [changeCacheValueTask]);
 
   const stopEditTask = (value) => {
     props.endEditTask(props.id, value);

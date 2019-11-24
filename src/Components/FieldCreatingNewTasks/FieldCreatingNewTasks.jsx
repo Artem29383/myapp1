@@ -23,7 +23,8 @@ const FieldCreatingNewTask =({
       {isTasks &&
       <button
         onClick={selectAll}
-        className={classNames(classes.toggleAll, isAllSelected && classes.active)}/>}
+        className={classNames(classes.toggleAll, isAllSelected && classes.active)}
+      />}
     </div>
   );
 };

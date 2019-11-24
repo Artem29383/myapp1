@@ -3,7 +3,6 @@ import { getStorage } from "../Utils/LocalStorage";
 const ADD_TASK = 'ToDo-Reducer/ADD_TASK';
 const CHANGE_TASK_STATUS = 'ToDo-Reducer/CHANGE__CHECK';
 const REMOVE_TASK = 'ToDo-Reducer/REMOVE_TASK';
-const INITIALIZATION = 'ToDo-Reducer/INITIALIZATION';
 const SELECT_ALL_TASK = 'ToDo-Reducer/SELECT_ALL_TASK';
 const CONTROL_ALL_SELECTED = 'ToDo-Reducer/CONTROL_ALL_SELECTED';
 const LEFT_TASKS = 'ToDo-Reducer/LEFT_TASKS';
@@ -15,10 +14,9 @@ const FILTER_TASKS =  'ToDo-Reducer/FILTER_TASKS';
 
 let initialState = {
   tasks: getStorage('todo'),
-  init: false,
   allSelected: false,
   leftTasks: 0,
-  filter: getStorage('filter')
+  filter: getStorage('filter', 'All')
 };
 
 
@@ -52,8 +50,6 @@ const taskReducer = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.filter(t => !t.check)
       };
-    case INITIALIZATION:
-      return {...state, init: true};
     case SELECT_ALL_TASK:
       return {
         ...state,
@@ -98,7 +94,6 @@ const taskReducer = (state = initialState, action) => {
   export const addTask = (taskId, valueTask) => ({type: ADD_TASK, taskId, valueTask});
   export const changeCheck = (taskId) => ({type: CHANGE_TASK_STATUS, taskId});
   export const removeTask = (taskId) => ({type: REMOVE_TASK, taskId});
-  export const initState = () => ({type: INITIALIZATION});
   export const selectedAllTasks = () => ({type: SELECT_ALL_TASK});
   export const controllAllSelected = () => ({type: CONTROL_ALL_SELECTED});
   export const getCountLeftTasks = () => ({type: LEFT_TASKS});

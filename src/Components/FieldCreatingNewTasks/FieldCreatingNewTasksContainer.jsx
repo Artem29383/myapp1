@@ -10,7 +10,7 @@ const FieldCreatingNewTaskContainer = (props) => {
       props.addTask(generateId(), e.currentTarget.value);
       editValue('');
     }
-  }, [value]);
+  }, [props]);
 
 
   const generateId = () => {

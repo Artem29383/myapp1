@@ -5,7 +5,6 @@ import Footer from './Footer';
 const FooterContainer = (props) => {
   const filterTasks = (method) => {
     props.filterTasks(method);
-    localStorage.setItem('filter', JSON.stringify(method));
   };
 
   return (
