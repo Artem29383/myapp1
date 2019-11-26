@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Footer.module.css';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 
 const Footer = ({
@@ -19,22 +19,34 @@ const Footer = ({
         <ul className={classes.filters}>
           <li>
             <a href="#/All"
-              className={classNames(classes.filterBtnJs, filter === 'All' && classes.active)}
+              className={classnames(
+                classes.filterBtnJs,
+                filter === 'All' && classes.active
+              )}
               onClick={(e) => filterTasks(e.currentTarget.innerText)}>All</a>
           </li>
           <li>
             <a href="#/Active"
-              className={classNames(classes.filterBtnJs, filter === 'Active' && classes.active)}
+              className={classnames(
+                classes.filterBtnJs,
+                filter === 'Active' && classes.active
+              )}
               onClick={(e) => filterTasks(e.currentTarget.innerText)}>Active</a>
           </li>
           <li>
             <a href="#/Completed"
-              className={classNames(classes.filterBtnJs, filter === 'Completed' && classes.active)}
+              className={classnames(
+                classes.filterBtnJs,
+                filter === 'Completed' && classes.active
+              )}
               onClick={(e) => filterTasks(e.currentTarget.innerText)}>Completed</a>
           </li>
         </ul>
         <button
-          className={classNames(classes.clear, leftTasks < tasks && classes.active)}
+          className={classnames(
+            classes.clear,
+            leftTasks < tasks && classes.active
+          )}
           onClick={() => {removeSelectedTasks()}}>
           Clear completed
         </button>

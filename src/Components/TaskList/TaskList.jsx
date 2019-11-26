@@ -4,7 +4,7 @@ import TaskContainer from './Task/TaskContainer';
 
 
 const TaskList = (props) => {
-
+  
   const tasks = props.tasks.map((t, index) => {
     if (props.filter === 'All') {
       return <TaskContainer

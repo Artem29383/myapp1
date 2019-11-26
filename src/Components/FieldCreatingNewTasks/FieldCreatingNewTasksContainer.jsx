@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import FieldCreatingNewTask from './FieldCreatingNewTasks';
+import { generateId } from "../../Utils/GenerateId";
 
 const FieldCreatingNewTaskContainer = (props) => {
   let [value, editValue] = useState('');
@@ -11,11 +12,7 @@ const FieldCreatingNewTaskContainer = (props) => {
       editValue('');
     }
   }, [props]);
-
-
-  const generateId = () => {
-    return Math.floor(1 + Math.random() * (9999999999999999));
-  };
+  
 
   const selectAll = () => {
     props.selectedAllTasks();
@@ -24,11 +21,11 @@ const FieldCreatingNewTaskContainer = (props) => {
 
   return (
     <FieldCreatingNewTask
-      isTasks = {!!props.tasks}
+      isTasks = {Boolean(props.tasks)}
       selectAll = {selectAll}
-      isAllSelected = {!!props.allSelected}
+      isAllSelected = {Boolean(props.allSelected)}
       value = {value}
-      changeValue = {(changeValue)}
+      changeValue = {changeValue}
     />
   )
 };

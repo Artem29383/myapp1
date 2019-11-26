@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classes from './FieldCreatingNewTasks.module.css';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 const FieldCreatingNewTask =({
@@ -23,7 +23,10 @@ const FieldCreatingNewTask =({
       {isTasks &&
       <button
         onClick={selectAll}
-        className={classNames(classes.toggleAll, isAllSelected && classes.active)}
+        className={classnames(
+          classes.toggleAll,
+          isAllSelected && classes.active
+        )}
       />}
     </div>
   );
@@ -43,4 +46,4 @@ FieldCreatingNewTask.defaultProps = {
   value: ''
 };
 
-export default  React.memo(FieldCreatingNewTask);
+export default  memo(FieldCreatingNewTask);

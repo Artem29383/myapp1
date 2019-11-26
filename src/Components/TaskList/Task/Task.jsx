@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classes from './Task.module.css';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 const Task = ({
   isCheck,
@@ -20,7 +20,13 @@ const Task = ({
       {!editMode
         ? <label className={classes.toggle}>
           <input type="checkbox"/>
-          <span onClick={changeBox} className={classNames(classes.checkboxCustom, isCheck && classes.check)}/>
+          <span
+            onClick={changeBox}
+            className={classnames(
+            classes.checkboxCustom,
+            isCheck && classes.check
+          )}
+          />
           <span className={classes.text} id={id}>
             {task}
           </span>
@@ -30,7 +36,10 @@ const Task = ({
         : <input
           ref={currentEditTask}
           autoFocus
-          className={classNames(classes.edit, editMode && classes.active)}
+          className={classnames(
+            classes.edit,
+            editMode && classes.active
+          )}
           value={cacheValueTask}
           onChange={(e) => changeValueTask(e.currentTarget.value)}
           onBlur={(e) => stopChangeTask(e, cacheValueTask)}
@@ -41,4 +50,4 @@ const Task = ({
   )
 };
 
-export default React.memo(Task);
+export default memo(Task);
