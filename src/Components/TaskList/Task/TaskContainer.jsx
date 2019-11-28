@@ -1,22 +1,41 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Task from './Task';
+import useDispatchHook from "../../../HOOKS/useDispatch";
+import {CHANGE_TASK_STATUS, END_EDIT_TASK, REMOVE_EMPTY_TASK, REMOVE_TASK} from "../../../Models/ActionConst";
 
-const TaskContainer = (props) => {
+const TaskContainer = ({
+  id,
+  isCheck,
+  task,
+  tasks
+}) => {
   const [editMode, setEditMode] = useState(false);
   const [cacheValueTask, changeCacheValueTask] = useState('');
+  const changeCheck = useDispatchHook(CHANGE_TASK_STATUS);
+  const removeTaskHook = useDispatchHook(REMOVE_TASK);
+  const removeEmptyTask = useDispatchHook(REMOVE_EMPTY_TASK);
+  const endEditTask = useDispatchHook(END_EDIT_TASK);
   const currentEditTask = useRef(null);
-
+  
+  
   const changeBox = () => {
-    props.changeCheck(props.id);
+    const changedTasks = tasks.map(t => {
+      if (t.id === id) {
+        return {...t, check: !t.check}
+      } else {
+        return {...t, check: t.check}
+      }});
+    changeCheck(changedTasks);
   };
 
   const removeTask = () => {
-    props.removeTask(props.id);
+    const changedTasks = tasks.filter(t => t.id !== id);
+    removeTaskHook(changedTasks);
   };
 
   const startChangeTask = () => {
     setEditMode(true);
-    changeCacheValueTask(props.task);
+    changeCacheValueTask(task);
   };
 
   const changeValueTask = useCallback((value) => {
@@ -24,9 +43,17 @@ const TaskContainer = (props) => {
   }, [changeCacheValueTask]);
 
   const stopEditTask = (value) => {
-    props.endEditTask(props.id, value);
+    let changedTasks = tasks.map(t => {
+      if (t.id === id) {
+        return {...t, title: value}
+      } else {
+        return {...t}
+      }
+    });
+    endEditTask(changedTasks);
     if (value === '') {
-      props.removeEmptyTask();
+      changedTasks = changedTasks.filter(t => t.title !== '');
+      removeEmptyTask(changedTasks);
     }
     setEditMode(false);
   };
@@ -38,16 +65,16 @@ const TaskContainer = (props) => {
     } else if (event.currentTarget === currentEditTask.current && !event.key) {
       stopEditTask(value);
     } else if (event.key === 'Escape') {
-      stopEditTask(props.task);
+      stopEditTask(task);
     }
   };
 
 
   return (
     <Task
-      isCheck = {props.isCheck}
-      id = {props.id}
-      task = {props.task}
+      isCheck = {isCheck}
+      id = {id}
+      task = {task}
       editMode={editMode}
       cacheValueTask={cacheValueTask}
       currentEditTask={currentEditTask}

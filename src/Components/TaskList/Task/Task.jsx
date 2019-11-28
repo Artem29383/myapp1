@@ -15,6 +15,7 @@ const Task = ({
   changeValueTask,
   stopChangeTask
 }) => {
+  
   return (
     <li className={classes.item} onDoubleClick={startChangeTask}>
       {!editMode

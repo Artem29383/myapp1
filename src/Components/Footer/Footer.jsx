@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 const Footer = ({
   leftTasks,
-  removeSelectedTasks,
+  removeSelectedTask,
   tasks,
   filter,
   filterTasks
@@ -47,7 +47,7 @@ const Footer = ({
             classes.clear,
             leftTasks < tasks && classes.active
           )}
-          onClick={() => {removeSelectedTasks()}}>
+          onClick={() => {removeSelectedTask()}}>
           Clear completed
         </button>
       </div>

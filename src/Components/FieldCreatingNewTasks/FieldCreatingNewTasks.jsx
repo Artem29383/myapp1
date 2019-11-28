@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import classes from './FieldCreatingNewTasks.module.css';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 
 const FieldCreatingNewTask =({
   isTasks,
@@ -32,18 +31,5 @@ const FieldCreatingNewTask =({
   );
 };
 
-FieldCreatingNewTask.propTypes = {
-  isTasks: PropTypes.bool,
-  changeValue: PropTypes.func.isRequired,
-  selectAll: PropTypes.func.isRequired,
-  value: PropTypes.string,
-  isAllSelected: PropTypes.bool
-};
-
-FieldCreatingNewTask.defaultProps = {
-  isTasks: true,
-  isAllSelected: true,
-  value: ''
-};
 
 export default  memo(FieldCreatingNewTask);

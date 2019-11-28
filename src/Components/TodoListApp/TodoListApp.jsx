@@ -5,14 +5,14 @@ import FieldCreatingNewTaskContainer from '../FieldCreatingNewTasks/FieldCreatin
 import FooterContainer from '../Footer/FooterContainer';
 
 
-const TodoListApp = (props) => {
+const TodoListApp = ({tasks}) => {
   return (
     <>
       <header className={classes.headerText}>todos</header>
       <div className={classes.todo}>
-        <FieldCreatingNewTaskContainer {...props}/>
-        <TaskList {...props}/>
-        {Boolean(props.tasks.length) && <FooterContainer {...props}/>}
+        <FieldCreatingNewTaskContainer tasks = {tasks}/>
+        <TaskList tasks = {tasks}/>
+        {Boolean(tasks.length) && <FooterContainer tasks = {tasks}/>}
       </div>
     </>
   );

@@ -1,29 +1,38 @@
 import React, { useState, useCallback } from 'react';
 import FieldCreatingNewTask from './FieldCreatingNewTasks';
-import { generateId } from "../../Utils/GenerateId";
+import nanoid from 'nanoid';
+import useHookSelector from "../../HOOKS/useSelector";
+import {getAllSelectedReselect} from "../../State/ToDo-Reselect";
+import useDispatchHook from "../../HOOKS/useDispatch";
+import {ADD_TASK, SELECT_ALL_TASK} from "../../Models/ActionConst";
 
-const FieldCreatingNewTaskContainer = (props) => {
+const FieldCreatingNewTaskContainer = ({tasks}) => {
+  const allSelected = useHookSelector(getAllSelectedReselect);
+  const addTask = useDispatchHook(ADD_TASK);
+  const selectedAllTasks = useDispatchHook(SELECT_ALL_TASK);
   let [value, editValue] = useState('');
 
   const changeValue = useCallback(e => {
     editValue(e.currentTarget.value);
-    if (e.key === 'Enter') {
-      props.addTask(generateId(), e.currentTarget.value);
+    if (e.key === 'Enter' && e.currentTarget.value.trim()) {
+      tasks = [...tasks, {id: nanoid(), check: false, title: e.currentTarget.value}];
+      addTask(tasks);
       editValue('');
     }
-  }, [props]);
+  }, [tasks, value]);
   
 
   const selectAll = () => {
-    props.selectedAllTasks();
+    tasks = tasks.map(t => ({...t, check: !allSelected}));
+    selectedAllTasks(tasks);
   };
 
 
   return (
     <FieldCreatingNewTask
-      isTasks = {Boolean(props.tasks)}
+      isTasks = {Boolean(tasks)}
       selectAll = {selectAll}
-      isAllSelected = {Boolean(props.allSelected)}
+      isAllSelected = {Boolean(allSelected)}
       value = {value}
       changeValue = {changeValue}
     />

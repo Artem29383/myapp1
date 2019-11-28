@@ -1,41 +1,16 @@
-import React from 'react';
+import React  from 'react';
 import classes from './TaskList.module.css';
-import TaskContainer from './Task/TaskContainer';
+import useHookSelector from "../../HOOKS/useSelector";
+import {getFilteredTasksReselect, getFilterValueReselect} from "../../State/ToDo-Reselect";
 
 
-const TaskList = (props) => {
-  
-  const tasks = props.tasks.map((t, index) => {
-    if (props.filter === 'All') {
-      return <TaskContainer
-        key={index}
-        id={t.id}
-        isCheck={t.check}
-        task={t.title}
-        {...props}
-      />
-    } else if (props.filter === 'Active' && !t.check) {
-      return <TaskContainer
-        key={index}
-        id={t.id}
-        isCheck={t.check}
-        task={t.title}
-        {...props}
-      />
-    } else if (props.filter === 'Completed' && t.check) {
-      return <TaskContainer
-        key={index}
-        id={t.id}
-        isCheck={t.check}
-        task={t.title}
-        {...props}
-      />
-    }
-  });
+const TaskList = ({tasks}) => {
+  const filter = useHookSelector(getFilterValueReselect);
+  const tasksd = useHookSelector(getFilteredTasksReselect(filter, tasks));
 
   return (<section className={classes.main}>
       <ul className={classes.todoList}>
-        {tasks}
+        {tasksd}
       </ul>
     </section>
   )

@@ -1,54 +1,35 @@
 import React, { useEffect } from 'react';
 import {
-  getAllSelectedFromState, getFilterValue,
-  getLeftTasks,
-  getTasks,
+  getFilterValueReselect,
+  getTasksReselect,
 } from './State/ToDo-Reselect';
-import {
-  addTask,
-  changeCheck, controllAllSelected, getCountLeftTasks,
-  removeSelectedTasks,
-  removeTask,
-  selectedAllTasks,
-  endEditTask, removeEmptyTask, filterTasks
-} from './State/ToDo-Reducer';
-import { connect } from 'react-redux';
 import TodoListApp from './Components/TodoListApp/TodoListApp';
+import useHookSelector from "./HOOKS/useSelector";
+import {CONTROL_ALL_SELECTED, LEFT_TASKS} from "./Models/ActionConst";
+import useDispatchHook from "./HOOKS/useDispatch";
+
+
 
 const  TodoList  = (props) => {
-
+  
+  
+  const tasks = useHookSelector(getTasksReselect);
+  const filter = useHookSelector(getFilterValueReselect);
+  const controllAllSelected = useDispatchHook(CONTROL_ALL_SELECTED);
+  const getCountLeftTasks = useDispatchHook(LEFT_TASKS);
   useEffect(() => {
-    props.getCountLeftTasks();
-    props.controllAllSelected();
-    localStorage.setItem('todo', JSON.stringify(props.tasks));
-    localStorage.setItem('filter', JSON.stringify(props.filter));
-  }, [props]);
-
+    const count = tasks.filter(t => !t.check).length;
+    getCountLeftTasks(count);
+    controllAllSelected();
+    localStorage.setItem('todo', JSON.stringify(tasks));
+    localStorage.setItem('filter', JSON.stringify(filter));
+  }, [tasks, controllAllSelected, filter, props, getCountLeftTasks]);
 
     return (
-     <TodoListApp {...props}/>
+     <TodoListApp  tasks = {tasks}/>
     );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    tasks: getTasks(state),
-    allSelected: getAllSelectedFromState(state),
-    leftTasks: getLeftTasks(state),
-    filter: getFilterValue(state)
-  }
-};
 
-export default connect(mapStateToProps,
-  {
-    changeCheck,
-    removeTask,
-    selectedAllTasks,
-    controllAllSelected,
-    getCountLeftTasks,
-    removeSelectedTasks,
-    addTask,
-    endEditTask,
-    removeEmptyTask,
-    filterTasks,
-  })(TodoList);
+
+export default TodoList;
