@@ -7,7 +7,6 @@ import {
   REMOVE_TASK,
   SELECT_ALL_TASK
 } from "./ActionConst";
-import { normalize, schema } from 'normalizr';
 
 let initialState = {
   tasks: getStorage('todo'),
@@ -16,23 +15,19 @@ let initialState = {
   filter: getStorage('filter', 'All'),
 };
 
-
 /*
-const task = new schema.Entity('tasks');
+const task = new schema.Entity('task');
 const tasksSchema = {tasks: [task]};
 const normalizedData = normalize(initialState, tasksSchema);
-
-/!*
 initialState = {
   tasks: {
     entities: normalizedData.entities.tasks || [],
-    ids: normalizedData.result.tasks
+    ids: normalizedData.result.tasks || []
   },
   allSelected: false,
   leftTasks: 0,
   filter: getStorage('filter', 'All'),
 };
-*!/
 */
 
 
