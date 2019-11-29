@@ -1,6 +1,4 @@
-import { createSelector } from "reselect";
-import TaskContainer from "../Components/TaskList/Task/TaskContainer";
-import React from "react";
+import {createSelector} from "reselect";
 
 const getTasks = (state) => {
   return state.task.tasks;
@@ -26,37 +24,19 @@ const getFilterValue = (state) => {
 
 export const getFilterValueReselect = createSelector([getFilterValue], (filter) => filter);
 
-const getFilteredTasks = (state) => {
-  return state.task.tasks;
-};
-
-export const getFilteredTasksReselect = (type, tasks) => createSelector([getFilteredTasks], (filteredTasks) => {
-  return filteredTasks.map((t, index) => {
-    if (type === 'All') {
-      return <TaskContainer
-        key={index}
-        id={t.id}
-        isCheck={t.check}
-        task={t.title}
-        tasks = {tasks}
-      />
-    }
-    else if (type === 'Active' && !t.check) {
-      return <TaskContainer
-        key={index}
-        id={t.id}
-        isCheck={t.check}
-        task={t.title}
-        tasks = {tasks}
-      />
-    } else if (type === 'Completed' && t.check) {
-      return <TaskContainer
-        key={index}
-        id={t.id}
-        isCheck={t.check}
-        task={t.title}
-        tasks = {tasks}
-      />
+export const getFilteredTasksReselect = type => createSelector([getTasks], (filteredTasks) => {
+  return filteredTasks.filter(t => {
+    switch (type) {
+      case 'All':
+        return t;
+      case 'Active':
+        return t.check;
+      case 'Completed':
+        return !t.check;
+      default:
+        return t;
     }
   });
 });
+
+export const getTasksCount = createSelector([getTasks], (tasks) => tasks.length);

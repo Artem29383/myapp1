@@ -1,4 +1,4 @@
 import {useSelector} from "react-redux";
 
-const useHookSelector = (func, params = {}) => useSelector(state => func(state, params));
-export default useHookSelector;
+const useSelectors = (func, params = {}) => useSelector(state => func(state, params));
+export default useSelectors;

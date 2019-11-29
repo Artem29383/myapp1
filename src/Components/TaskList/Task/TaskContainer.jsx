@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Task from './Task';
-import useDispatchHook from "../../../HOOKS/useDispatch";
+import useAction from "../../../HOOKS/useDispatch";
 import {CHANGE_TASK_STATUS, END_EDIT_TASK, REMOVE_EMPTY_TASK, REMOVE_TASK} from "../../../Models/ActionConst";
 
 const TaskContainer = ({
@@ -11,12 +11,11 @@ const TaskContainer = ({
 }) => {
   const [editMode, setEditMode] = useState(false);
   const [cacheValueTask, changeCacheValueTask] = useState('');
-  const changeCheck = useDispatchHook(CHANGE_TASK_STATUS);
-  const removeTaskHook = useDispatchHook(REMOVE_TASK);
-  const removeEmptyTask = useDispatchHook(REMOVE_EMPTY_TASK);
-  const endEditTask = useDispatchHook(END_EDIT_TASK);
+  const changeCheck = useAction(CHANGE_TASK_STATUS);
+  const removeTaskHook = useAction(REMOVE_TASK);
+  const removeEmptyTask = useAction(REMOVE_EMPTY_TASK);
+  const endEditTask = useAction(END_EDIT_TASK);
   const currentEditTask = useRef(null);
-  
   
   const changeBox = () => {
     const changedTasks = tasks.map(t => {
@@ -29,8 +28,7 @@ const TaskContainer = ({
   };
 
   const removeTask = () => {
-    const changedTasks = tasks.filter(t => t.id !== id);
-    removeTaskHook(changedTasks);
+    removeTaskHook(id);
   };
 
   const startChangeTask = () => {

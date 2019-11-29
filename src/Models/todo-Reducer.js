@@ -7,8 +7,7 @@ import {
   REMOVE_TASK,
   SELECT_ALL_TASK
 } from "./ActionConst";
-
-
+import { normalize, schema } from 'normalizr';
 
 let initialState = {
   tasks: getStorage('todo'),
@@ -18,12 +17,33 @@ let initialState = {
 };
 
 
+/*
+const task = new schema.Entity('tasks');
+const tasksSchema = {tasks: [task]};
+const normalizedData = normalize(initialState, tasksSchema);
+
+/!*
+initialState = {
+  tasks: {
+    entities: normalizedData.entities.tasks || [],
+    ids: normalizedData.result.tasks
+  },
+  allSelected: false,
+  leftTasks: 0,
+  filter: getStorage('filter', 'All'),
+};
+*!/
+*/
+
+
 const taskReducer = (state = initialState, action) => {
+  localStorage.setItem('todo', JSON.stringify(state.tasks));
+  localStorage.setItem('filter', JSON.stringify(state.filter));
   switch (action.type) {
     case ADD_TASK:
-        return {
+      return {
           ...state,
-          tasks: action.payload,
+          tasks: [...state.tasks, {id: action.payload[0], check: false, title: action.payload[1]}],
       };
     case CHANGE_TASK_STATUS:
       return {
@@ -33,17 +53,17 @@ const taskReducer = (state = initialState, action) => {
     case REMOVE_TASK:
       return {
         ...state,
-        tasks: action.payload
+        tasks: state.tasks.filter(t => t.id !== action.payload)
       };
     case REMOVE_SELECT_TASKS:
       return {
         ...state,
-        tasks: action.payload
+        tasks: state.tasks.filter(t => !t.check)
       };
     case SELECT_ALL_TASK:
       return {
         ...state,
-        tasks: action.payload
+        tasks: state.tasks.map(t => ({...t, check: !state.allSelected}))
       };
     case CONTROL_ALL_SELECTED:
       return {

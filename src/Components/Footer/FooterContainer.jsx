@@ -1,24 +1,23 @@
 import React from 'react';
 import Footer from './Footer';
-import useHookSelector from "../../HOOKS/useSelector";
+import useSelectors from "../../HOOKS/useSelector";
 import {getFilterValueReselect, getLeftTasksReselect} from "../../State/ToDo-Reselect";
-import useDispatchHook from "../../HOOKS/useDispatch";
+import useAction from "../../HOOKS/useDispatch";
 import {FILTER_TASKS, REMOVE_SELECT_TASKS} from "../../Models/ActionConst";
 
 
-const FooterContainer = ({tasks}) => {
-  const leftTasks = useHookSelector(getLeftTasksReselect);
-  const filter = useHookSelector(getFilterValueReselect);
-  const removeSelectedTasks = useDispatchHook(REMOVE_SELECT_TASKS);
-  const filterTasks = useDispatchHook(FILTER_TASKS);
+const FooterContainer = ({countTasks}) => {
+  const leftTasks = useSelectors(getLeftTasksReselect);
+  const filter = useSelectors(getFilterValueReselect);
+  const removeSelectedTasks = useAction(REMOVE_SELECT_TASKS);
+  const filterTasks = useAction(FILTER_TASKS);
   
   const filteredTasks = (method) => {
     filterTasks(method);
   };
   
   const removeSelectedTask = () => {
-    const task = tasks.filter(t => !t.check);
-    removeSelectedTasks(task)
+    removeSelectedTasks()
   };
   
   
@@ -27,7 +26,7 @@ const FooterContainer = ({tasks}) => {
     <Footer
       leftTasks={leftTasks}
       removeSelectedTask={removeSelectedTask}
-      tasks={tasks.length}
+      countTasks={countTasks}
       filter={filter}
       filterTasks = {filteredTasks}
     />
