@@ -24,7 +24,7 @@ const getFilterValue = (state) => {
 
 export const getFilterValueReselect = createSelector([getFilterValue], (filter) => filter);
 
-export const getFilteredTasksReselect = type => createSelector([getTasks], (filteredTasks) => {
+export const getFilteredTasksReselect = (type) => createSelector([getTasks], (filteredTasks) => {
   return filteredTasks.filter(t => {
     switch (type) {
       case 'All':

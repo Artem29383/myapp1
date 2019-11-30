@@ -7,7 +7,7 @@ import TaskContainer from "./Task/TaskContainer";
 
 const TaskList = ({tasks}) => {
   const filter = useSelectors(getFilterValueReselect);
-  let tasksd = useSelectors(getFilteredTasksReselect(filter, tasks));
+  let tasksd = useSelectors(getFilteredTasksReselect(filter));
   tasksd = tasksd.map((t, index) => <TaskContainer
     key={index}
     id={t.id}

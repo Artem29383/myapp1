@@ -15,22 +15,6 @@ let initialState = {
   filter: getStorage('filter', 'All'),
 };
 
-/*
-const task = new schema.Entity('task');
-const tasksSchema = {tasks: [task]};
-const normalizedData = normalize(initialState, tasksSchema);
-initialState = {
-  tasks: {
-    entities: normalizedData.entities.tasks || [],
-    ids: normalizedData.result.tasks || []
-  },
-  allSelected: false,
-  leftTasks: 0,
-  filter: getStorage('filter', 'All'),
-};
-*/
-
-
 const taskReducer = (state = initialState, action) => {
   localStorage.setItem('todo', JSON.stringify(state.tasks));
   localStorage.setItem('filter', JSON.stringify(state.filter));
