@@ -13,7 +13,7 @@ const TaskList = ({tasks}) => {
     id={t.id}
     isCheck={t.check}
     task={t.title}
-    tasks = {tasksd}
+    tasks = {tasks}
   />);
   
   return (<section className={classes.main}>
