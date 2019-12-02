@@ -1,10 +1,16 @@
-import {createSelector} from "reselect";
+import { createSelector } from "reselect";
 
 const getTasks = (state) => {
-  return state.task.tasks;
+  return state.task.tasks.entities;
 };
 
-export const getTasksReselect = createSelector([getTasks], (tasks) => tasks);
+export const getTasksReselect = createSelector([getTasks], (entities) => entities);
+
+const getIds = (state) => {
+  return state.task.tasks.ids;
+};
+
+export const getIdsReselect = createSelector([getIds], (ids) => ids);
 
 const getAllSelectedFromState = (state) => {
   return state.task.allSelected;
@@ -24,19 +30,23 @@ const getFilterValue = (state) => {
 
 export const getFilterValueReselect = createSelector([getFilterValue], (filter) => filter);
 
-export const getFilteredTasksReselect = (type) => createSelector([getTasks], (filteredTasks) => {
-  return filteredTasks.filter(t => {
+export const getFilteredTasksReselect = (type, tasks) => createSelector([getIds], (ids) => {
+  return ids.filter(t => {
     switch (type) {
       case 'All':
-        return t;
+        return tasks[t];
       case 'Active':
-        return t.check;
+        return !tasks[t].check;
       case 'Completed':
-        return !t.check;
+        return tasks[t].check;
       default:
-        return t;
+        return tasks[t];
     }
   });
 });
 
-export const getTasksCount = createSelector([getTasks], (tasks) => tasks.length);
+const getTasksLength = (state) => {
+  return Object.keys(state.task.tasks.entities).length;
+};
+
+export const getTasksCount = createSelector([getTasksLength], (entities) => entities);

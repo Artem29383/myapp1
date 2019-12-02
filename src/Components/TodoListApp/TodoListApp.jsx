@@ -7,14 +7,14 @@ import useSelectors from "../../HOOKS/useSelector";
 import {getTasksCount} from "../../State/ToDo-Reselect";
 
 
-const TodoListApp = ({tasks}) => {
+const TodoListApp = () => {
   const countTasks = useSelectors(getTasksCount);
   return (
     <>
       <header className={classes.headerText}>todos</header>
       <div className={classes.todo}>
         <FieldCreatingNewTaskContainer countTasks = {countTasks}/>
-        <TaskList tasks = {tasks}/>
+        <TaskList/>
         {Boolean(countTasks) && <FooterContainer countTasks = {countTasks}/>}
       </div>
     </>

@@ -18,13 +18,12 @@ const FieldCreatingNewTaskContainer = ({countTasks}) => {
       addTask([nanoid(), e.currentTarget.value]);
       editValue('');
     }
-  }, [addTask]);
+  }, [editValue, addTask]);
   
 
   const selectAll = () => {
-    selectedAllTasks();
+      selectedAllTasks();
   };
-
 
   return (
     <FieldCreatingNewTask
