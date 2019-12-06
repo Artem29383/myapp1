@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './Footer.module.css';
 import classnames from 'classnames';
-import { useSelector } from "react-redux";
-import { getTasksCount } from "../../models/todo/selectors";
+import { useSelector } from 'react-redux';
+import { getTasksCount } from '../../models/todo/selectors';
 
 
 const Footer = ({
