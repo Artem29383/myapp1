@@ -26,7 +26,7 @@ const  TodoListApp  = () => {
     controllAllSelected();
   }, [tasks, ids, controllAllSelected, getCountLeftTasks, filter]);
   return (
-    <TodoList  tasks = {tasks}/>
+    <TodoList  tasks = {tasks} />
   );
 };
 
