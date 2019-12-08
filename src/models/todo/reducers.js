@@ -71,8 +71,8 @@ const taskReducer = (state = initialState, action) => {
         ...state,
         tasks: {
           ...state.tasks,
-          ids: removeArrayElement(state.tasks.ids, action.payload),
-          entities: removePropFromObject(state.tasks.entities, action.payload)
+          entities: removePropFromObject(entities, action.payload),
+          ids: removeArrayElement(copyIds, action.payload)
         }
       };
     case REMOVE_SELECT_TASKS:

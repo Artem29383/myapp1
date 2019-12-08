@@ -44,6 +44,5 @@ export const getFilteredTasksReselect = (type, tasks) => createSelector([getIds]
     }
   });
 });
-
-export const hasTasks = createSelector([getIds], (ids) => Boolean(ids.length));
 export const getTasksCount = createSelector([getIds], (ids) => ids.length);
+export const hasTasks = createSelector([getTasksCount], (ids) => Boolean(ids));
