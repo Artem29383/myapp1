@@ -9,9 +9,7 @@ const reducer = combineReducers(
   }
 );
 
-const store = createStore(reducer, /* preloadedState, */ devToolsEnhancer(
-  // Specify name here, actionsBlacklist, actionsCreators and other options if needed
-));
+const store = createStore(reducer);
 
 
 export default store;
