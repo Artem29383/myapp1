@@ -14,7 +14,7 @@ const store = createStore(reducer, /* preloadedState, */ devToolsEnhancer(
 ));
 
 store.subscribe(() => {
-  localStorage.setItem('todo', JSON.stringify(store.getState().task.tasks));
+  localStorage.setItem('todo', JSON.stringify(store.getState().task.tasks.entities));
   localStorage.setItem('filter', JSON.stringify(store.getState().task.filter));
 });
 
