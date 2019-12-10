@@ -4,7 +4,8 @@ import useAction from '../../../hooks/useAction';
 import {
   CHANGE_TASK_STATUS,
   END_EDIT_TASK,
-  REMOVE_TASK } from '../../../models/todo/actions';
+  REMOVE_TASK
+} from '../../../models/todo/actions';
 
 const TaskContainer = ({
   id,
@@ -18,7 +19,7 @@ const TaskContainer = ({
   const endEditTask = useAction(END_EDIT_TASK);
   const currentEditTask = useRef(null);
   const changeBox = () => {
-    changeCheck([id, !isCheck, task]);
+    changeCheck({id: id, check: !isCheck, title: task});
   };
   const removeTask = () => {
     removeTaskHook(id);
@@ -34,7 +35,7 @@ const TaskContainer = ({
   }, [changeCacheValueTask]);
 
   const stopEditTask = (value) => {
-    endEditTask([id, isCheck, value]);
+    endEditTask({id: id, check: isCheck, title: value});
     if (value === '') {
       removeTaskHook(id);
     }

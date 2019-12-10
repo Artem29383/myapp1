@@ -15,14 +15,14 @@ const FieldCreatingNewTaskContainer = ({countTasks}) => {
   const changeValue = useCallback(e => {
     editValue(e.currentTarget.value);
     if (e.key === 'Enter' && e.currentTarget.value.trim()) {
-      addTask([nanoid(), e.currentTarget.value]);
+      addTask({id: nanoid(), title: e.currentTarget.value});
       editValue('');
     }
   }, [editValue, addTask]);
   
 
   const selectAll = () => {
-      selectedAllTasks();
+      selectedAllTasks(allSelected);
   };
 
   return (

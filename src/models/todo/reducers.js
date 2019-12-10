@@ -2,10 +2,8 @@ import { getStorage } from '../../utils/localStorage';
 import {
   ADD_TASK,
   CHANGE_TASK_STATUS,
-  CONTROL_ALL_SELECTED,
   END_EDIT_TASK,
   FILTER_TASKS,
-  LEFT_TASKS,
   REMOVE_SELECT_TASKS,
   REMOVE_TASK,
   SELECT_ALL_TASK
@@ -16,7 +14,7 @@ import {
 } from 'normalizr';
 import { removePropFromObject } from '../../utils/removePropFromObject';
 import { removeArrayElement } from '../../utils/removeArrayElement';
-import  deepCopy  from '../../utils/original';
+import  deepCopy  from '../../utils/deepCopy';
 
 let initialState = {
   tasks: getStorage('todo'),
@@ -30,8 +28,6 @@ initialState = {
     entities: dataNormalized.entities.tasks || {},
     ids: dataNormalized.result.tasks || []
   },
-  allSelected: false,
-  leftTasks: 0,
   filter: getStorage('filter', 'All'),
 };
 
@@ -40,23 +36,29 @@ const taskReducer = (state = initialState, action) => {
   let entities = {...state.tasks.entities};
   let copyIds = [...state.tasks.ids];
   const tasksCopy = deepCopy(state.tasks);
-  let [id, check, title] = [];
+  let {id, check, title} = {};
   switch (action.type) {
+    
+    
     case ADD_TASK:
-      [id, title] = action.payload;
+      ({id, title} = action.payload);
       tasksCopy.entities[id] = {id, check: false, title};
       tasksCopy.ids = [...tasksCopy.ids, id];
       return {
         ...state,
         tasks: tasksCopy
       };
+      
+      
     case CHANGE_TASK_STATUS:
-      [id, check, title] = action.payload;
+      ({id, check, title} = action.payload);
       tasksCopy.entities[id] = {id, check, title};
       return {
         ...state,
         tasks: tasksCopy
       };
+      
+      
     case REMOVE_TASK:
       return {
         ...state,
@@ -66,6 +68,8 @@ const taskReducer = (state = initialState, action) => {
           ids: removeArrayElement(copyIds, action.payload)
         }
       };
+      
+      
     case REMOVE_SELECT_TASKS:
       state.tasks.ids.map(id => {
         if (entities[id].check) {
@@ -80,8 +84,10 @@ const taskReducer = (state = initialState, action) => {
           ids: copyIds
         }
       };
+      
+      
     case SELECT_ALL_TASK:
-      copyIds.map(id => entities[id].check = !state.allSelected);
+      copyIds.map(id => entities[id].check = action.payload);
       return {
         ...state,
         tasks: {
@@ -89,28 +95,24 @@ const taskReducer = (state = initialState, action) => {
           ids: copyIds
         }
       };
-    case CONTROL_ALL_SELECTED:
-      return {
-        ...state,
-        allSelected: !action.payload,
-      };
-    case LEFT_TASKS:
-      return {
-        ...state,
-        leftTasks: action.payload
-      };
+      
+      
     case END_EDIT_TASK:
-      [id, check, title] = action.payload;
+      ({id, check, title} = action.payload);
       tasksCopy.entities[id] = {id, check, title};
       return {
         ...state,
         tasks: tasksCopy
       };
+      
+      
     case FILTER_TASKS:
       return {
         ...state,
         filter: action.payload
       };
+      
+      
     default:
       return state;
   }

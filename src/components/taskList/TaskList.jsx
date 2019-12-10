@@ -1,32 +1,28 @@
 import React  from 'react';
 import classes from './TaskList.module.css';
 import useSelector from '../../hooks/useSelector';
-import {
-  getFilteredTasksReselect,
-  getFilterValueReselect,
-  getTasksReselect
-} from '../../models/todo/selectors';
+import { getFilteredTasksReselect } from '../../models/todo/selectors';
 import TaskContainer from './Task/TaskContainer';
 
 
 const TaskList = () => {
-  let tasks = useSelector(getTasksReselect);
-  const filter = useSelector(getFilterValueReselect);
-  const filteredTasks = useSelector(getFilteredTasksReselect(filter, tasks));
-  tasks = filteredTasks.map((t, index) => {
-    return <TaskContainer
-      key={index}
-      id={tasks[t].id}
-      isCheck={tasks[t].check}
-      task={tasks[t].title}
-      tasks = {tasks}
-    />;
+  const [filteredTasks, tasks] = useSelector(getFilteredTasksReselect);
+  const task = filteredTasks.map((t) => {
+    return (
+      <TaskContainer
+        key={t}
+        id={t}
+        isCheck={tasks[t].check}
+        task={tasks[t].title}
+      />
+    );
   });
   
   
-  return (<section className={classes.main}>
+  return (
+    <section className={classes.main}>
       <ul className={classes.todoList}>
-        {tasks}
+        {task}
       </ul>
     </section>
   )
