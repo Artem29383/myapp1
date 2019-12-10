@@ -6,7 +6,10 @@ import {
   getLeftTasksReselect,
 } from '../../models/todo/selectors';
 import useAction from '../../hooks/useAction';
-import { FILTER_TASKS, REMOVE_SELECT_TASKS } from '../../models/todo/actions';
+import {
+  FILTER_TASKS,
+  REMOVE_SELECT_TASKS
+} from '../../models/todo/actions';
 
 
 const FooterContainer = () => {

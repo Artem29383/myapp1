@@ -1,7 +1,10 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Task from './Task';
 import useAction from '../../../hooks/useAction';
-import { CHANGE_TASK_STATUS, END_EDIT_TASK, REMOVE_TASK } from '../../../models/todo/actions';
+import {
+  CHANGE_TASK_STATUS,
+  END_EDIT_TASK,
+  REMOVE_TASK } from '../../../models/todo/actions';
 
 const TaskContainer = ({
   id,

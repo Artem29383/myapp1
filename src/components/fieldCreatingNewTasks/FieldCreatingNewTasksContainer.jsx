@@ -2,15 +2,15 @@ import React, { useState, useCallback } from 'react';
 import FieldCreatingNewTask from './FieldCreatingNewTasks';
 import nanoid from 'nanoid';
 import useSelector from '../../hooks/useSelector';
-import { getAllSelectedReselect } from '../../models/todo/selectors';
+import { isAllSelectedReselect } from '../../models/todo/selectors';
 import useAction from '../../hooks/useAction';
 import { ADD_TASK, SELECT_ALL_TASK } from '../../models/todo/actions';
 
 const FieldCreatingNewTaskContainer = ({countTasks}) => {
-  const allSelected = useSelector(getAllSelectedReselect);
+  const allSelected =  useSelector(isAllSelectedReselect);
   const addTask = useAction(ADD_TASK);
   const selectedAllTasks = useAction(SELECT_ALL_TASK);
-  let [value, editValue] = useState('');
+  const [value, editValue] = useState('');
 
   const changeValue = useCallback(e => {
     editValue(e.currentTarget.value);
@@ -29,7 +29,7 @@ const FieldCreatingNewTaskContainer = ({countTasks}) => {
     <FieldCreatingNewTask
       isTasks = {countTasks}
       selectAll = {selectAll}
-      isAllSelected = {Boolean(allSelected)}
+      isAllSelected = {allSelected}
       value = {value}
       changeValue = {changeValue}
     />

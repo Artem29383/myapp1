@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Footer.module.css';
 import classnames from 'classnames';
 import { useSelector } from 'react-redux';
-import { getTasksCount } from '../../models/todo/selectors';
+import { getTasksCountReselect } from '../../models/todo/selectors';
 
 
 const Footer = ({
@@ -11,7 +11,7 @@ const Footer = ({
   filter,
   filterTasks
 }) => {
-  const countTasks = useSelector(getTasksCount);
+  const countTasks = useSelector(getTasksCountReselect);
   return (
     <div className={classes.dataFooter}>
 		  <span className={classes.todoCount}>

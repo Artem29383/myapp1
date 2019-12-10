@@ -13,5 +13,9 @@ const store = createStore(reducer, /* preloadedState, */ devToolsEnhancer(
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 ));
 
+store.subscribe(() => {
+  localStorage.setItem('todo', JSON.stringify(store.getState().task.tasks));
+  localStorage.setItem('filter', JSON.stringify(store.getState().task.filter));
+});
 
 export default store;

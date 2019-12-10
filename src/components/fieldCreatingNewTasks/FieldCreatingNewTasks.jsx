@@ -24,7 +24,7 @@ const FieldCreatingNewTask =({
         onClick={selectAll}
         className={classnames(
           classes.toggleAll,
-          isAllSelected && classes.active
+          !isAllSelected && classes.active
         )}
       />}
     </div>

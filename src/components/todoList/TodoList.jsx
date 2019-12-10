@@ -4,11 +4,11 @@ import TaskList from '../taskList/TaskList';
 import FieldCreatingNewTaskContainer from '../fieldCreatingNewTasks/FieldCreatingNewTasksContainer';
 import FooterContainer from '../footer/FooterContainer';
 import useSelector from '../../hooks/useSelector';
-import { hasTasks } from '../../models/todo/selectors';
+import { isTasksReselect } from '../../models/todo/selectors';
 
 
 const TodoList = () => {
-  const isTasks = useSelector(hasTasks);
+  const isTasks = useSelector(isTasksReselect);
   return (
     <Fragment>
       <header className={classes.headerText}>todos</header>
