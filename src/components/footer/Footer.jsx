@@ -1,59 +1,57 @@
 import React from 'react';
 import classes from './Footer.module.css';
 import classnames from 'classnames';
-import { useSelector } from 'react-redux';
-import { getTasksCountReselect } from '../../models/todo/selectors';
 
 
 const Footer = ({
   leftTasks,
   removeSelectedTask,
   filter,
-  filterTasks
-}) => {
-  const countTasks = useSelector(getTasksCountReselect);
-  return (
-    <div className={classes.dataFooter}>
+  filterTasks,
+  countTasks
+}) => (
+  <div className={classes.dataFooter}>
 		  <span className={classes.todoCount}>
 			<strong>{leftTasks}</strong>
 			  item left
 		  </span>
-        <ul className={classes.filters}>
-          <li>
-            <a href="#/All"
-              className={classnames(
-                classes.filterBtnJs,
-                filter === 'All' && classes.active
-              )}
-              onClick={(e) => filterTasks(e.currentTarget.innerText)}>All</a>
-          </li>
-          <li>
-            <a href="#/Active"
-              className={classnames(
-                classes.filterBtnJs,
-                filter === 'Active' && classes.active
-              )}
-              onClick={(e) => filterTasks(e.currentTarget.innerText)}>Active</a>
-          </li>
-          <li>
-            <a href="#/Completed"
-              className={classnames(
-                classes.filterBtnJs,
-                filter === 'Completed' && classes.active
-              )}
-              onClick={(e) => filterTasks(e.currentTarget.innerText)}>Completed</a>
-          </li>
-        </ul>
-        <button
-          className={classnames(
-            classes.clear,
-            leftTasks < countTasks && classes.active
-          )}
-          onClick={() => {removeSelectedTask()}}>
-          Clear completed
-        </button>
-      </div>
-    )
-};
+    <ul className={classes.filters}>
+      <li>
+        <a href="#/All"
+           className={classnames(
+             classes.filterBtnJs,
+             filter === 'All' && classes.active
+           )}
+           onClick={filterTasks}>All</a>
+      </li>
+      <li>
+        <a href="#/Active"
+           className={classnames(
+             classes.filterBtnJs,
+             filter === 'Active' && classes.active
+           )}
+           onClick={filterTasks}>Active</a>
+      </li>
+      <li>
+        <a href="#/Completed"
+           className={classnames(
+             classes.filterBtnJs,
+             filter === 'Completed' && classes.active
+           )}
+           onClick={filterTasks}>Completed</a>
+      </li>
+    </ul>
+    <button
+      className={classnames(
+        classes.clear,
+        leftTasks < countTasks && classes.active
+      )}
+      onClick={() => {
+        removeSelectedTask()
+      }}>
+      Clear completed
+    </button>
+  </div>
+);
 
 export default Footer;

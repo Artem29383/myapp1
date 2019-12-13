@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Footer from './Footer';
 import useSelector from '../../hooks/useSelector';
 import {
   getFilterValueReselect,
-  getLeftTasksReselect,
+  getLeftTasksReselect, getTasksCountReselect,
 } from '../../models/todo/selectors';
 import useAction from '../../hooks/useAction';
 import {
@@ -17,10 +17,11 @@ const FooterContainer = () => {
   const filter = useSelector(getFilterValueReselect);
   const removeSelectedTasks = useAction(REMOVE_SELECT_TASKS);
   const filterTasks = useAction(FILTER_TASKS);
+  const countTasks = useSelector(getTasksCountReselect);
   
-  const filteredTasks = (method) => {
-    filterTasks(method);
-  };
+  const filteredTasks = useCallback((e) => {
+    filterTasks(e.currentTarget.innerText);
+  }, []);
   
   const removeSelectedTask = () => {
     removeSelectedTasks();
@@ -33,6 +34,7 @@ const FooterContainer = () => {
       removeSelectedTask={removeSelectedTask}
       filter={filter}
       filterTasks={filteredTasks}
+      countTasks = {countTasks}
     />
   )
 };

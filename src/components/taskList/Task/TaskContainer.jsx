@@ -30,8 +30,8 @@ const TaskContainer = ({
     changeCacheValueTask(task);
   };
 
-  const changeValueTask = useCallback((value) => {
-    changeCacheValueTask(value);
+  const onChangeHandler = useCallback((e) => {
+    changeCacheValueTask(e.currentTarget.value);
   }, [changeCacheValueTask]);
 
   const stopEditTask = (value) => {
@@ -41,23 +41,22 @@ const TaskContainer = ({
     }
     setEditMode(false);
   };
+  
 
-
-  const stopChangeTask = (event, value) => {
-    if (event.key === 'Enter') {
-      stopEditTask(value);
-    } else if (event.currentTarget === currentEditTask.current && !event.key) {
-      stopEditTask(value);
-    } else if (event.key === 'Escape') {
+  const stopChangeTaskHandler = useCallback((e) => {
+    if (e.key === 'Enter') {
+      stopEditTask(e.currentTarget.value);
+    } else if (e.currentTarget === currentEditTask.current && !e.key) {
+      stopEditTask(e.currentTarget.value);
+    } else if (e.key === 'Escape') {
       stopEditTask(task);
     }
-  };
+  }, []);
 
 
   return (
     <Task
       isCheck = {isCheck}
-      id = {id}
       task = {task}
       editMode={editMode}
       cacheValueTask={cacheValueTask}
@@ -65,8 +64,8 @@ const TaskContainer = ({
       changeBox={changeBox}
       removeTask={removeTask}
       startChangeTask={startChangeTask}
-      changeValueTask={(changeValueTask)}
-      stopChangeTask={stopChangeTask}
+      onChangeHandler={onChangeHandler}
+      stopChangeTaskHandler={stopChangeTaskHandler}
     />
   )
 };

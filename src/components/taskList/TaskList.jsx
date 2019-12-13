@@ -7,22 +7,21 @@ import TaskContainer from './Task/TaskContainer';
 
 const TaskList = () => {
   const [filteredTasks, tasks] = useSelector(getFilteredTasksReselect);
-  const task = filteredTasks.map((t) => {
-    return (
+  const createTask = filteredTasks.map((t) => (
       <TaskContainer
         key={t}
         id={t}
         isCheck={tasks[t].check}
         task={tasks[t].title}
       />
-    );
-  });
+    )
+  );
   
   
   return (
     <section className={classes.main}>
       <ul className={classes.todoList}>
-        {task}
+        {createTask}
       </ul>
     </section>
   )

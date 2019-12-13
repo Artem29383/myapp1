@@ -4,7 +4,6 @@ import classnames from 'classnames';
 
 const Task = ({
   isCheck,
-  id,
   task,
   editMode,
   cacheValueTask,
@@ -12,43 +11,39 @@ const Task = ({
   changeBox,
   removeTask,
   startChangeTask,
-  changeValueTask,
-  stopChangeTask
-}) => {
-  
-  return (
-    <li className={classes.item} onDoubleClick={startChangeTask}>
-      {!editMode
-        ? <label className={classes.toggle}>
-          <input type="checkbox"/>
-          <span
-            onClick={changeBox}
-            className={classnames(
+  onChangeHandler,
+  stopChangeTaskHandler
+}) => (
+  <li className={classes.item} onDoubleClick={startChangeTask}>
+    {!editMode
+      ? <label className={classes.toggle}>
+        <input type="checkbox" />
+        <span
+          onClick={changeBox}
+          className={classnames(
             classes.checkboxCustom,
             isCheck && classes.check
           )}
-          />
-          <span className={classes.text} id={id}>
-            {task}
-          </span>
-          <button className={classes.removeBtn} onClick={removeTask} />
-          <button className={classes.taskText} />
-      </label>
-        : <input
-          ref={currentEditTask}
-          autoFocus
-          className={classnames(
-            classes.edit,
-            editMode && classes.active
-          )}
-          value={cacheValueTask}
-          onChange={(e) => changeValueTask(e.currentTarget.value)}
-          onBlur={(e) => stopChangeTask(e, cacheValueTask)}
-          onKeyDown={(e) => stopChangeTask(e, cacheValueTask)}
         />
-      }
-    </li>
-  )
-};
+        <span className={classes.text}>
+          {task}
+        </span>
+        <button className={classes.removeBtn} onClick={removeTask} />
+      </label>
+      : <input
+        ref={currentEditTask}
+        autoFocus
+        className={classnames(
+          classes.edit,
+          editMode && classes.active
+        )}
+        value={cacheValueTask}
+        onChange={onChangeHandler}
+        onBlur={stopChangeTaskHandler}
+        onKeyDown={stopChangeTaskHandler}
+      />
+    }
+  </li>
+);
 
 export default memo(Task);
