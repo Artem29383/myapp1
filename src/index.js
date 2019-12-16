@@ -13,6 +13,6 @@ const TodoListApp = () => (
 
 ReactDOM.render(
   <Provider store={store}>
-    <TodoListApp/>
+    <TodoListApp />
   </Provider>, document.getElementById('root'));
 
