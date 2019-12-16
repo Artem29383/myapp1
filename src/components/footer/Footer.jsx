@@ -7,7 +7,9 @@ const Footer = ({
   leftTasks,
   removeSelectedTask,
   filter,
-  filterTasks,
+  showAllTasks,
+  showActiveTasks,
+  showCompletedTasks,
   countTasks
 }) => (
   <div className={classes.dataFooter}>
@@ -17,28 +19,28 @@ const Footer = ({
 		  </span>
     <ul className={classes.filters}>
       <li>
-        <a href="#/All"
+        <a href="/#/all"
            className={classnames(
              classes.filterBtnJs,
              filter === 'All' && classes.active
            )}
-           onClick={filterTasks}>All</a>
+           onClick={showAllTasks}>All</a>
       </li>
       <li>
-        <a href="#/Active"
+        <a href="/#/active"
            className={classnames(
              classes.filterBtnJs,
              filter === 'Active' && classes.active
            )}
-           onClick={filterTasks}>Active</a>
+           onClick={showActiveTasks}>Active</a>
       </li>
       <li>
-        <a href="#/Completed"
+        <a href="/#/completed"
            className={classnames(
              classes.filterBtnJs,
              filter === 'Completed' && classes.active
            )}
-           onClick={filterTasks}>Completed</a>
+           onClick={showCompletedTasks}>Completed</a>
       </li>
     </ul>
     <button

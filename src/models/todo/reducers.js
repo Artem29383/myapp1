@@ -2,7 +2,7 @@ import { getStorage } from '../../utils/localStorage';
 import {
   ADD_TASK,
   CHANGE_TASK_STATUS,
-  END_EDIT_TASK,
+  CHANGE_TASK_TITLE,
   FILTER_TASKS,
   REMOVE_SELECT_TASKS,
   REMOVE_TASK,
@@ -37,9 +37,9 @@ const taskReducer = (state = initialState, action) => {
   
   
     case CHANGE_TASK_STATUS: {
-      const {id, check, title} = action.payload;
+      const id = action.payload;
       const tasksCopy = deepCopy(state.tasks);
-      tasksCopy.entities[id] = {id, check, title};
+      tasksCopy.entities[id].check = !tasksCopy.entities[id].check;
       return {
         ...state,
         tasks: tasksCopy
@@ -106,10 +106,10 @@ const taskReducer = (state = initialState, action) => {
     }
       
       
-    case END_EDIT_TASK: {
-      const {id, check, title} = action.payload;
+    case CHANGE_TASK_TITLE: {
+      const {id, title} = action.payload;
       const tasksCopy = deepCopy(state.tasks);
-      tasksCopy.entities[id] = {id, check, title};
+      tasksCopy.entities[id] = {id, check: tasksCopy.entities[id].check, title};
       return {
         ...state,
         tasks: tasksCopy

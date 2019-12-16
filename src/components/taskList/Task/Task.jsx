@@ -7,19 +7,19 @@ const Task = ({
   task,
   editMode,
   cacheValueTask,
-  currentEditTask,
-  changeBox,
+  changeCheckBox,
   removeTask,
   startChangeTask,
   onChangeHandler,
-  stopChangeTaskHandler
+  stopChangeTaskHandler,
+  stopChangeTasksHandlerBlur
 }) => (
   <li className={classes.item} onDoubleClick={startChangeTask}>
     {!editMode
       ? <label className={classes.toggle}>
         <input type="checkbox" />
         <span
-          onClick={changeBox}
+          onClick={changeCheckBox}
           className={classnames(
             classes.checkboxCustom,
             isCheck && classes.check
@@ -31,7 +31,6 @@ const Task = ({
         <button className={classes.removeBtn} onClick={removeTask} />
       </label>
       : <input
-        ref={currentEditTask}
         autoFocus
         className={classnames(
           classes.edit,
@@ -39,7 +38,7 @@ const Task = ({
         )}
         value={cacheValueTask}
         onChange={onChangeHandler}
-        onBlur={stopChangeTaskHandler}
+        onBlur={stopChangeTasksHandlerBlur}
         onKeyDown={stopChangeTaskHandler}
       />
     }

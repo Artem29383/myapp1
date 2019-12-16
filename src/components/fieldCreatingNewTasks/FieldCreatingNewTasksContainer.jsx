@@ -4,8 +4,8 @@ import nanoid from 'nanoid';
 import useSelector from '../../hooks/useSelector';
 import { isAllSelectedReselect } from '../../models/todo/selectors';
 import useAction from '../../hooks/useAction';
-import { 
-  ADD_TASK, 
+import {
+  ADD_TASK,
   SELECT_ALL_TASK
 } from '../../models/todo/actions';
 

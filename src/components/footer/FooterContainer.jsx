@@ -3,7 +3,8 @@ import Footer from './Footer';
 import useSelector from '../../hooks/useSelector';
 import {
   getFilterValueReselect,
-  getLeftTasksReselect, getTasksCountReselect,
+  getLeftTasksReselect,
+  getTasksCountReselect,
 } from '../../models/todo/selectors';
 import useAction from '../../hooks/useAction';
 import {
@@ -19,13 +20,21 @@ const FooterContainer = () => {
   const filterTasks = useAction(FILTER_TASKS);
   const countTasks = useSelector(getTasksCountReselect);
   
-  const filteredTasks = useCallback((e) => {
-    filterTasks(e.currentTarget.innerText);
-  }, []);
+  const showAllTasks = useCallback(() => {
+    filterTasks('All');
+  }, [filterTasks]);
   
-  const removeSelectedTask = () => {
+  const showActiveTasks = useCallback(() => {
+    filterTasks('Active');
+  }, [filterTasks]);
+  
+  const showCompletedTasks = useCallback(() => {
+    filterTasks('Completed');
+  }, [filterTasks]);
+  
+  const removeSelectedTask = useCallback(() => {
     removeSelectedTasks();
-  };
+  }, [removeSelectedTasks]);
   
   
   return (
@@ -33,7 +42,9 @@ const FooterContainer = () => {
       leftTasks={leftTasks}
       removeSelectedTask={removeSelectedTask}
       filter={filter}
-      filterTasks={filteredTasks}
+      showAllTasks={showAllTasks}
+      showActiveTasks = {showActiveTasks}
+      showCompletedTasks = {showCompletedTasks}
       countTasks = {countTasks}
     />
   )
