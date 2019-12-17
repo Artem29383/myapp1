@@ -21,21 +21,21 @@ let initialState = {
 };
 
 const tasksScheme = new schema.Entity('tasks');
-const myTasks = {tasks: [tasksScheme]};
+const myTasks = { tasks: [tasksScheme] };
 const dataNormalized = normalize(initialState, myTasks);
 initialState = {
   tasks: {
     entities: dataNormalized.entities.tasks || {},
     ids: dataNormalized.result.tasks || []
   },
-  filter: getStorage('filter', 'All'),
+  filter: getStorage('filter', 'all'),
 };
 
 
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
-  
-  
+    
+    
     case CHANGE_TASK_STATUS: {
       const id = action.payload;
       const tasksCopy = deepCopy(state.tasks);
@@ -48,19 +48,19 @@ const taskReducer = (state = initialState, action) => {
     
     
     case ADD_TASK: {
-      const {id, title} = action.payload;
+      const { id, title } = action.payload;
       const tasksCopy = deepCopy(state.tasks);
-      tasksCopy.entities[id] = {id, check: false, title};
+      tasksCopy.entities[id] = { id, check: false, title };
       tasksCopy.ids = [...tasksCopy.ids, id];
       return {
         ...state,
         tasks: tasksCopy
       };
     }
-      
+    
     
     case REMOVE_TASK: {
-      const entities = {...state.tasks.entities};
+      const entities = { ...state.tasks.entities };
       let copyIds = [...state.tasks.ids];
       return {
         ...state,
@@ -71,10 +71,10 @@ const taskReducer = (state = initialState, action) => {
         }
       };
     }
-      
-      
+    
+    
     case REMOVE_SELECT_TASKS: {
-      const entities = {...state.tasks.entities};
+      const entities = { ...state.tasks.entities };
       let copyIds = [...state.tasks.ids];
       state.tasks.ids.map(id => {
         if (entities[id].check) {
@@ -90,10 +90,10 @@ const taskReducer = (state = initialState, action) => {
         }
       };
     }
-      
-      
+    
+    
     case SELECT_ALL_TASK: {
-      const entities = {...state.tasks.entities};
+      const entities = { ...state.tasks.entities };
       let copyIds = [...state.tasks.ids];
       copyIds.map(id => entities[id].check = action.payload);
       return {
@@ -104,25 +104,25 @@ const taskReducer = (state = initialState, action) => {
         }
       };
     }
-      
-      
+    
+    
     case CHANGE_TASK_TITLE: {
-      const {id, title} = action.payload;
+      const { id, title } = action.payload;
       const tasksCopy = deepCopy(state.tasks);
-      tasksCopy.entities[id] = {id, check: tasksCopy.entities[id].check, title};
+      tasksCopy.entities[id] = { id, check: tasksCopy.entities[id].check, title };
       return {
         ...state,
         tasks: tasksCopy
       };
     }
-      
+    
     case FILTER_TASKS:
       return {
         ...state,
         filter: action.payload
       };
-      
-      
+    
+    
     default:
       return state;
   }

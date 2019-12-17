@@ -22,7 +22,7 @@ const Footer = ({
           <a href="/#/all"
              className={classnames(
                classes.filterBtnJs,
-               filter === 'All' && classes.active
+               filter === 'all' && classes.active
              )}
              onClick={showAllTasks}>All</a>
         </li>
@@ -30,7 +30,7 @@ const Footer = ({
           <a href="/#/active"
              className={classnames(
                classes.filterBtnJs,
-               filter === 'Active' && classes.active
+               filter === 'active' && classes.active
              )}
              onClick={showActiveTasks}>Active</a>
         </li>
@@ -38,7 +38,7 @@ const Footer = ({
           <a href="/#/completed"
              className={classnames(
                classes.filterBtnJs,
-               filter === 'Completed' && classes.active
+               filter === 'completed' && classes.active
              )}
              onClick={showCompletedTasks}>Completed</a>
         </li>

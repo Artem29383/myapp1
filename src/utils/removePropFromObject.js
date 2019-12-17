@@ -1,5 +1,5 @@
 export const removePropFromObject = (obj, id) => {
-  let res = {...obj};
+  let res = { ...obj };
   delete res[id];
   return res;
 };

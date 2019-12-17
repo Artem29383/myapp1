@@ -9,32 +9,32 @@ import {
   SELECT_ALL_TASK
 } from '../../models/todo/actions';
 
-const FieldCreatingNewTaskContainer = ({countTasks}) => {
-  const allSelected =  useSelector(isAllSelectedReselect);
+const FieldCreatingNewTaskContainer = ({ countTasks }) => {
+  const allSelected = useSelector(isAllSelectedReselect);
   const addTask = useAction(ADD_TASK);
   const selectedAllTasks = useAction(SELECT_ALL_TASK);
   const [value, editValue] = useState('');
-
+  
   const changeValue = useCallback(e => {
     editValue(e.currentTarget.value);
     if (e.key === 'Enter' && e.currentTarget.value.trim()) {
-      addTask({id: nanoid(), title: e.currentTarget.value});
+      addTask({ id: nanoid(), title: e.currentTarget.value });
       editValue('');
     }
   }, [editValue, addTask]);
   
-
+  
   const selectAll = () => {
-      selectedAllTasks(allSelected);
+    selectedAllTasks(allSelected);
   };
-
+  
   return (
     <FieldCreatingNewTask
-      isTasks = {countTasks}
-      selectAll = {selectAll}
-      isAllSelected = {allSelected}
-      value = {value}
-      changeValue = {changeValue}
+      isTasks={countTasks}
+      selectAll={selectAll}
+      isAllSelected={allSelected}
+      value={value}
+      changeValue={changeValue}
     />
   )
 };

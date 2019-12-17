@@ -14,7 +14,7 @@ const Task = ({
   stopChangeTaskHandler,
   stopChangeTasksHandlerBlur
 }) => (
-  <li className={classes.item} onDoubleClick={startChangeTask}>
+  <li className={classes.item}>
     {!editMode
       ? <label className={classes.toggle}>
         <input type="checkbox" />
@@ -25,7 +25,7 @@ const Task = ({
             isCheck && classes.check
           )}
         />
-        <span className={classes.text}>
+        <span className={classes.text} onDoubleClick={startChangeTask}>
           {task}
         </span>
         <button className={classes.removeBtn} onClick={removeTask} />

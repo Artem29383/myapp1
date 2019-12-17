@@ -13,9 +13,9 @@ const TodoList = () => {
     <Fragment>
       <header className={classes.headerText}>todos</header>
       <div className={classes.todo}>
-        <FieldCreatingNewTaskContainer countTasks = {isTasks} />
-        <TaskList />
-        {isTasks && <FooterContainer />}
+        <FieldCreatingNewTaskContainer countTasks={isTasks}/>
+        <TaskList/>
+        {isTasks && <FooterContainer/>}
       </div>
     </Fragment>
   );

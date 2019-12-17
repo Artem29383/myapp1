@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import classes from './TaskList.module.css';
 import useSelector from '../../hooks/useSelector';
 import { getFilteredTasksReselect } from '../../models/todo/selectors';

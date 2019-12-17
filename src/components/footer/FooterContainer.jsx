@@ -19,26 +19,25 @@ const FooterContainer = () => {
   const removeSelectedTasks = useAction(REMOVE_SELECT_TASKS);
   const filterTasks = useAction(FILTER_TASKS);
   const countTasks = useSelector(getTasksCountReselect);
-  const showAllTasks = useCallback(() => {
-    filterTasks('All');
-  }, [filterTasks]);
   
   
   useEffect(() => {
-    let path = window.location.hash.match(/[a-z]+/igm);
+    const path = window.location.hash.match(/[a-z]+/igm);
     if (path !== null) {
-      path = path[0][0].toUpperCase() + path[0].slice(1);
-      filterTasks(path);
+      filterTasks(path[0]);
     }
   }, []);
   
+  const showAllTasks = useCallback(() => {
+    filterTasks('all');
+  }, [filterTasks]);
   
   const showActiveTasks = useCallback(() => {
-    filterTasks('Active');
+    filterTasks('active');
   }, [filterTasks]);
   
   const showCompletedTasks = useCallback(() => {
-    filterTasks('Completed');
+    filterTasks('completed');
   }, [filterTasks]);
   
   const removeSelectedTask = useCallback(() => {
@@ -52,9 +51,9 @@ const FooterContainer = () => {
       removeSelectedTask={removeSelectedTask}
       filter={filter}
       showAllTasks={showAllTasks}
-      showActiveTasks = {showActiveTasks}
-      showCompletedTasks = {showCompletedTasks}
-      countTasks = {countTasks}
+      showActiveTasks={showActiveTasks}
+      showCompletedTasks={showCompletedTasks}
+      countTasks={countTasks}
     />
   )
 };
