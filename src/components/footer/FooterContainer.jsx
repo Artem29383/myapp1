@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Footer from './Footer';
 import useSelector from '../../hooks/useSelector';
 import {
@@ -19,10 +19,17 @@ const FooterContainer = () => {
   const removeSelectedTasks = useAction(REMOVE_SELECT_TASKS);
   const filterTasks = useAction(FILTER_TASKS);
   const countTasks = useSelector(getTasksCountReselect);
-  
   const showAllTasks = useCallback(() => {
     filterTasks('All');
   }, [filterTasks]);
+  
+  
+  useEffect(() => {
+    let path = window.location.hash.match(/[a-z]+/igm)[0];
+    path = path[0].toUpperCase() + path.slice(1);
+    filterTasks(path);
+  }, []);
+  
   
   const showActiveTasks = useCallback(() => {
     filterTasks('Active');
