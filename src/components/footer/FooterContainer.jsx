@@ -25,7 +25,9 @@ const FooterContainer = () => {
   
   
   useEffect(() => {
+    console.log(window.location);
     let path = window.location.hash.match(/[a-z]+/igm)[0];
+    console.log(path);
     path = path[0].toUpperCase() + path.slice(1);
     filterTasks(path);
   }, []);
